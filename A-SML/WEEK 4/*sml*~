@@ -1,0 +1,591 @@
+Standard ML of New Jersey (64-bit) v110.96 [built: Fri Dec 13 14:59:34 2019]
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+[autoloading]
+[library $SMLNJ-BASIS/basis.cm is stable]
+[library $SMLNJ-BASIS/(basis.cm):basis-common.cm is stable]
+[autoloading done]
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+[autoloading]
+[autoloading done]
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) * 'a -> 'b
+val it = () : unit
+- val test6 = rev_string "abc" = "cba";
+val test6 = true : bool
+- val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4;
+stdIn:3.5-3.82 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: ('Z -> 'Y option) * 'Z
+  operand:         [> ty] -> [> ty] option
+  in expression:
+    first_answer (fn x => if <exp> > <exp> then SOME <exp> else NONE)
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a -> 'b
+val it = () : unit
+- val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4;
+stdIn:4.5-4.82 Error: operator and operand do not agree [overload conflict]
+  operator domain: [> ty]
+  operand:         [int ty] list
+  in expression:
+    (first_answer (fn x => if <exp> then <exp> else <exp>))
+        (1 :: 2 :: 3 :: <exp> :: <exp>)
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+hw3.sml:70.30-70.33 Error: type constructor int given 1 arguments, wants 0
+hw3.sml:70.25-70.29 Error: type constructor list given 0 arguments, wants 1
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+hw3.sml:71.6-71.22 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: 'Z -> 'Y
+  operand:         'X * 'W
+  in expression:
+    List.map (f,xs)
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b) -> 'a list -> 'b list
+val it = () : unit
+- val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] ;
+val test7 = [NONE,NONE,NONE,SOME 4,SOME 5] : int option list
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+hw3.sml:71.6-75.33 Error: match redundant and nonexhaustive
+          x :: xs' => ...
+    -->   x :: nil => ...
+  
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+val it = () : unit
+- val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4;
+val test7 = true : bool
+- val test7 = first_answer (fn x => if x > 4 then SOME x else NONE) [1,2,3,4,5] = 4;
+val test7 = false : bool
+- val test7 = first_answer (fn x => if x > 4 then SOME x else NONE) [1,2,3,4,5];
+val test7 = 5 : int
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:79.13-79.15 Error: syntax error: replacing  DARROW with  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.13-65.16
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:80.13-80.15 Error: syntax error: replacing  DARROW with  OP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.13-65.16
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:76.23-76.27 Error: non-constructor applied to argument in pattern
+hw3.sml:81.26-81.29 Error: unbound variable or constructor: aux
+hw3.sml:81.43-81.46 Error: unbound variable or constructor: acc
+hw3.sml:78.12-78.15 Error: unbound variable or constructor: acc
+hw3.sml:81.29-81.53 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: 'Z list * 'Z list
+  operand:         _ option * 'Y
+  in expression:
+    SOME <errorvar> @ lst
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:76.18 Error: syntax error: inserting  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.13-65.16
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:76.19-76.23 Error: non-constructor applied to argument in pattern
+hw3.sml:81.43-81.46 Error: unbound variable or constructor: acc
+hw3.sml:78.12-78.15 Error: unbound variable or constructor: acc
+hw3.sml:81.29-81.53 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: 'Z list * 'Z list
+  operand:         _ option * 'Y
+  in expression:
+    SOME <errorvar> @ lst
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:81.29-81.53 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: 'Z list * 'Z list
+  operand:         'Y option * 'X
+  in expression:
+    SOME acc @ lst
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:81.26-81.55 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: ('Z -> 'Y) * 'Z list * 'X list
+  operand:         ('Z -> 'Y) * 'Z list * 'X list list option
+  in expression:
+    aux (f,xs',SOME ((<exp> @ <exp>) :: nil))
+hw3.sml:77.9-81.56 Error: types of rules do not agree [tycon mismatch]
+  earlier rule(s): 'Z list -> 'Y list
+  this rule: 'Z list -> _ option
+  in rule:
+    :: (x,xs') =>
+      (case (f x)
+        of NONE => NONE
+         | SOME lst => aux (<exp>,<exp>,<exp>))
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:77.9-81.49 Error: types of rules do not agree [tycon mismatch]
+  earlier rule(s): 'Z list -> 'Y list
+  this rule: 'Z list -> 'X option
+  in rule:
+    :: (x,xs') =>
+      (case (f x)
+        of NONE => NONE
+         | SOME lst => aux (<exp>,<exp>,<exp>))
+hw3.sml:76.14-81.49 Error: right-hand-side of clause does not agree with function result type [tycon mismatch]
+  expression:  'Z list
+  result type:  'Y option
+  in declaration:
+    aux =
+      (fn (f,xs,acc) =>
+            (case xs
+              of <pat> => <exp>
+               | <pat> => <exp>))
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:81.11 Error: syntax error: inserting  RPAREN
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.13-65.16
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+hw3.sml:77.9-81.48 Error: types of rules do not agree [tycon mismatch]
+  earlier rule(s): 'Z list -> 'Y list
+  this rule: 'Z list -> 'X option
+  in rule:
+    :: (x,xs') =>
+      (case (f x)
+        of NONE => NONE
+         | SOME lst => aux (<exp>,<exp>,<exp>))
+hw3.sml:76.14-81.48 Error: right-hand-side of clause does not agree with function result type [tycon mismatch]
+  expression:  'Z list
+  result type:  'Y option
+  in declaration:
+    aux =
+      (fn (f,xs,acc) =>
+            (case xs
+              of <pat> => <exp>
+               | <pat> => <exp>))
+val it = () : unit
+- use "hw3.sml";
+[opening hw3.sml]
+exception NoAnswer
+datatype pattern
+  = ConstP of int
+  | ConstructorP of string * pattern
+  | TupleP of pattern list
+  | UnitP
+  | Variable of string
+  | Wildcard
+datatype valu
+  = Const of int | Constructor of string * valu | Tuple of valu list | Unit
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
+datatype typ
+  = Anything | Datatype of string | IntT | TupleT of typ list | UnitT
+val only_capitals = fn : string list -> string list
+val longest_string1 = fn : string list -> string
+val longest_string2 = fn : string list -> string
+val longest_string_helper = fn : int * int -> string list -> string
+val longest_string3 = fn : string list -> string
+val longest_string4 = fn : string list -> string
+val longest_capitalized = fn : string list -> string
+val rev_string = fn : string -> string
+val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b
+val all_answers = fn : ('a -> 'b list option) -> 'a list -> 'b list option
+val it = () : unit
+- val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE;
+val test8 = true : bool
+- val test8 = all_answers (fn x => if x > 4 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE;
+val test8 = true : bool
+- val test8 = all_answers (fn x => if x > 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE;

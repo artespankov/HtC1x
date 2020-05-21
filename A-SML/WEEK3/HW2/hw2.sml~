@@ -1,0 +1,154 @@
+(* PROBLEM 1  *)
+
+fun same_string(s1 : string, s2 : string) =
+    s1 = s2;
+
+
+
+(* PROBLEM 1 SOLUTIONS *)
+
+(* a *)
+fun all_except_option (s, xs) =
+    case xs of
+	[] => NONE
+      | x::xs' => 
+	if same_string(s, x) then
+	    SOME xs'
+	else
+	    case all_except_option(s, xs') of
+	 	NONE => NONE
+	      | SOME z => SOME(x::z);
+
+(* b *)
+fun get_substitutions1 (subs, s) =
+    case subs of
+	[] => []
+     |  sub::subs' => case all_except_option(s, sub) of
+			  NONE => get_substitutions1(subs', s) 
+		       |  SOME subs'' => subs'' @ get_substitutions1(subs', s);
+						   
+(* c *)
+fun get_substitutions2 (subs, s) =
+    let fun aux (subs, s, res) =
+	    case subs of
+		[] => res
+	     |  sub::subs' => case all_except_option(s, sub) of
+				  NONE => aux(subs', s, res) 
+			       |  SOME subs'' => aux(subs', s, res @ subs'') 
+    in
+	aux(subs, s, [])
+    end;
+
+(* d *)
+fun similar_names (names, {first=x, middle=y,last=z}) =
+    let val variants = get_substitutions2(names, x)
+    in
+	let fun aux (variants, name, result) =
+		case variants of
+		    [] => result
+		  | var::variants' => aux(variants', name, result @ [{first=var, middle=y, last=z}])
+	in
+	    aux (variants, {first=x, middle=y,last=z}, [{first=x, middle=y,last=z}])
+	end
+    end;
+							       
+(* PROBLEM 2 *)
+			      
+datatype suit = Clubs | Diamonds | Hearts | Spades;
+datatype rank = Jack | Queen | King | Ace | Num of int ;
+type card = suit * rank;
+
+datatype color = Red | Black;
+datatype move = Discard of card | Draw ;
+
+exception IllegalMove;
+
+
+
+(* PROBLEM 2 SOLUTIONS *)
+
+(* a *)
+fun card_color (suit, rank) =
+    case (suit, rank) of
+	(Spades, _) => Black 
+     |  (Clubs, _)  => Black 
+     |  _           => Red;
+
+(* b *)
+fun card_value (suit, rank) =
+    case rank of
+	Num rank => rank
+      | Ace      => 11
+      | _        => 10;
+
+	
+(* c *)
+fun remove_card (cs, c, e) =
+    case cs of
+	[] => [c]
+      | head_c::tail_c =>
+	if head_c = c
+	then
+	    tail_c
+	else
+	    case remove_card(tail_c, c, e) of
+		[c]=> raise e
+	      | cs' => head_c::cs';
+			 
+(* d *)
+fun all_same_color (cs) =
+    case cs of
+	[] => true
+      | _::[] => true 
+      | head::neck::rest => if card_color(head) = card_color(neck)
+			    then all_same_color(neck::rest)
+			    else false;
+	
+(* e *)
+fun sum_cards (cs) =
+    let fun aux(cs, acc) =
+	    case cs of
+		[] => acc
+	      | c::cs' => aux(cs', acc+card_value(c))
+    in
+	aux(cs, 0)
+    end;
+
+(* f *)
+fun score (cs, goal) =
+    let val sum = sum_cards(cs)
+    in
+	let val pre_score =
+		if sum > goal
+		then 3 * (sum - goal)
+		else goal - sum
+	in
+	    if all_same_color(cs) then (pre_score div 2) else pre_score
+	end
+    end;
+
+(* g *)
+fun officiate (cards, moves, goal) =
+    let fun aux(cards, moves, goal, hand ) =
+	    case moves of
+		[] => hand
+	     |  m::moves' => (case m of
+				  Draw => (case cards of
+					       [] => aux([], moves', goal, hand)
+					    |  c::cc' => aux(cc', moves', goal, c::hand))
+			       |  Discard card => aux(remove_card(cards, card, IllegalMove), moves', goal, hand))
+    in
+	score((aux(cards, moves, goal, [])), goal)
+    end;
+
+
+
+ (* ---- *)
+ (* fun same_card (c1, c2) =
+     let
+	 val (suit1, rank1) = c1
+	 val (suit2, rank2) = c2
+      in
+	 (suit1, rank1) = (suit2, rank2)
+      end;
+*)

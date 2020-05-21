@@ -1,0 +1,226 @@
+fun double x = 2 * x;
+fun incr x = x + 1;
+val a_tuple = (double, incr, double(incr 7));
+val eighteen = (#1 a_tuple) 9;
+
+		    
+(* FUNction as an argument *)
+fun n_times(f, n, x) =
+    if n = 0
+    then x
+    else f (n_times(f, n-1, x));
+
+fun increment x = x+1;
+fun double x = x+x;
+val x1 = n_times(double, 4, 7);
+val x2 = n_times(increment, 5, 11);
+val x3 = n_times(tl, 2, ["a", "b", "c"])
+
+fun addition(n, x) = n_times(increment, n, x);
+fun double_n_times(n, x) = n_times(double, n, x);
+fun nth_tail(n, x) = n_times(tl, n, x);
+
+(* fun times_until_zero (f, x) =
+    if x=0 then 0 else 1+times_until_zero(f, f(x-1)); *)
+
+
+
+(* Annonymous functions *)
+fun triple_n_times(n, x) =
+    n_times((fn x => 3*x), n, x); (* declare function and pass as the first argument *)
+
+
+
+(* Map, Filter *)
+fun map(f, xs) =
+    case xs of
+	[] => []
+      | x::xs' => (f x)::map(f, xs');
+
+val x1 = map((fn x => x+1), [4, 8, 12, 16]);
+val x2 = map(hd, [[1, 2], [3, 4], [5, 6, 7]]);
+(* val map = fn: ('a -> 'b) * 'a list -> 'b list; *)
+	
+
+fun filter(f, xs) =
+    case xs of
+	[] => []
+      | x::xs' => if f x
+		  then x::(filter(f, xs'))
+		  else filter(f, xs');
+
+fun is_even v =
+    (v mod 2 = 0)
+	
+fun all_even xs = filter(is_even, xs);
+fun all_even_snd xs = filter((fn (_, v) => is_even v), xs);
+
+(* Func returns Func *)
+fun double_or_triple f = (* (int -> bool) -> (int -> int) *)
+    if f 7
+    then fn x => 2 * x
+    else fn x => 3 * x;
+
+val double = double_or_triple (fn x => x-3 = 4);
+
+datatype exp = Constant of int
+	     | Negate of exp
+	     | Add of exp * exp
+	     | Multiply of exp * exp;
+
+(*given an exp, is every contant in it an even number*)
+fun true_of_all_constants(f, e) =
+    case e of
+	Constant i => f i
+     |  Negate e1 => true_of_all_constants(f, e1)
+     |  Add(e1, e2) => true_of_all_constants(f, e1)
+		       andalso  true_of_all_constants(f, e2)
+     | Multiply(e1, e2) => true_of_all_constants(f, e1)
+			   andalso  true_of_all_constants(f, e2);
+		     
+
+fun all_even e = true_of_all_constants((fn x => x mod 2 = 0), e);
+    
+(* Lexical scope *)
+fun filter (f,xs) =
+    case xs of
+	[] => []
+      | x::xs' => if f x then x::(filter(f, xs')) else filter(f, xs');
+
+fun greaterThanX x = fn y => y > x; (* int -> (int -> bool) *)
+
+fun noNegatives xs = filter(greaterThanX ~1, xs);
+
+fun allGreater (xs, n) = filter(fn x => x > n, xs);
+
+
+(* fold == reduce == inject *)
+
+fun fold (f, acc, xs) =
+    case xs of
+	[] => acc
+      | x::xs => fold(f, f(acc, x), xs);
+
+(* Closures idioms *)
+(* Combining functions *)
+
+fun compose (f, g) = fn x => f(g x);
+
+(* ('b -> 'c) * ('a -> 'b) -> ('a -> 'c) *)
+
+fun sqrt_of_abs i = Math.sqrt (Real.fromInt (abs i));
+
+fun sqrt_of_abs i = (Math.sqrt o Real.fromInt o abs) i;
+
+val sqrt_of_abs = Math.sqrt o Real.fromInt o abs;
+
+(* |> !> (right-to-left)  - backward to "o" (composition operator: left-to-right ) *)
+
+infix !>
+fun x !> f = f x
+fun sqrt_of_abs i = i !> abs !> Real.fromInt !> Math.sqrt
+
+fun backup1 (f, g) = fn x => case f x of
+				 NONE = g x
+			       | SOME y => y;
+
+fun backup (f, g) = fn x => f x handle _ => g x
+					       
+						  
+(* currying *)
+					      
+fun sorted_tupled (x,y,z) = z>=y andalso y>=x;
+
+val t1 = sorted_tupled (3,7,11);
+
+val sorted3 = fn x => fn y => fn z => z >= y andalso y >= x;
+val t2 = ((sorted3 7) 9) 11;
+
+fun sorted3 x, y, z = z >= y andalso y >= x;
+val t1 = sorted3 7 9 11;
+
+fun fold f acc xs =
+    case xs of
+	[]     => acc
+      | x::xs' => fold f (f(acc, x)) xs';
+
+fun sum xs = fold (fn (x,y) => x+y) 0 xs;
+			   
+(* Partial application *)			     
+fun sorted3 x, y, z = z >= y andalso y >= x;
+
+fun fold f acc xs =
+    case xs of
+	[]     => acc
+      | x::xs' => fold f (f(acc, x)) xs';
+
+val is_nonnegative = (sorted3 0 0);
+val sum_ = fold (fn (x,y) => x+y) 0;
+
+fun exists predicate xs =
+    case xs of
+	[] => false
+      | x::xs' => predicate x orelse exists predicate xs';
+
+val no = exists (fn x => x=7) [4, 11, 23]; (*false*)
+val hasZero = exists (fn x => x=0); (* int list -> bool *)
+val incrementAll = List.map (fn x => x+1); (* int list -> int list *)
+
+val removeZeros = List.filter(fn x => x <> 0);
+
+(* Currying wrapup *)
+(* fun curry f = fn x => fn y => f (x, y) *)
+fun curry f x y => f (x, y)
+fun uncurry f(x,y) => f x y;
+(* fun other_curry f => fn x => fn y => f y x *)
+fun other_curry f x y = f y x
+
+				   
+
+fun range i j = if i > j then [] else i::range(i+1, j);
+
+(* val countup = range 1; *)
+(* countup 6 [1,2,3,4,5,6] *)
+(* val countup = (curry range) 1; *)
+val countup = curry range 1;
+
+(* Reference (mutable objects) *)
+val x = ref 42;
+val y = ref 42;
+
+val z = x;
+val _ = x := 43;
+val w = (!y) + (!z); (* 85 *)
+
+(* Callbacks *)
+val callbacks: (int -> unit) list ref = ref [];
+
+fun onKeyEvent f = callbacks := f :: (!callbacks);
+
+fun onEvent i =
+    let fun loop fs =
+	    case fs of
+		[] => ()
+	      | f::fs' => (f i; loop fs')
+    in loop (!callbacks) end;
+
+val timesPressed = ref 0;
+val _ = onKeyEvent (fn _ => timesPressed := (!timesPressed) +1);
+
+
+fun printIfPressed i =
+    onKeyEvent (fn j =>
+	if i=j
+	then print ("you pressed " ^ Int.toString i)
+	else ());
+      
+(* standard library documentation
+http://www.standardml.org/Basis/manpages.html *)
+	       
+					    
+		  
+			 
+
+
+
+		  
